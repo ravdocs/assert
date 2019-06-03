@@ -30,32 +30,6 @@ exports.deepStrictEqual = function(label, actual, expected) {
 		case 'regexp': return exports._deepStrictEqualRegexp(label, actual, expected);
 		case 'map': return exports._deepStrictEqualMap(label, actual, expected);
 		case 'set': return exports._deepStrictEqualSet(label, actual, expected);
-
-		// case 'generatorfunction':
-		// case 'function':
-		// case 'symbol':
-		// case 'promise':
-		// case 'weakmap':
-		// case 'weakset':
-		// case 'int8array':
-		// case 'uint8array':
-		// case 'uint8clampedarray':
-		// case 'int16array':
-		// case 'uint16array':
-		// case 'int32array':
-		// case 'uint32array':
-		// case 'float32array':
-		// case 'float64array':
-		// case 'generator':
-		// case 'mapiterator':
-		// case 'setiterator':
-		// case 'stringiterator':
-		// case 'arrayiterator':
-		// case 'generator':
-		case 'undefined':
-		case 'null':
-		case 'boolean':
-		case 'string':
 		default: return exports.strictEqual(label, actual, expected);
 	}
 };
