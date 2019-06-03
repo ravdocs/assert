@@ -1,0 +1,46 @@
+{
+  "name": "@ravdocs/assert",
+  "version": "1.0.0",
+  "description": "Wrapper around the assert module",
+  "keywords": [
+    "assert",
+    "bdd",
+    "mocha",
+    "tdd",
+    "test"
+  ],
+  "homepage": "https://github.com/ravdocs/assert",
+  "bugs": {
+    "url": "https://github.com/ravdocs/assert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravdocs/assert.git"
+  },
+  "license": "MIT",
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "node_modules/.bin/eslint --rulesdir node_modules/@ravdocs/eslint/rules .",
+    "test": "mocha --recursive"
+  },
+  "dependencies": {
+    "kind-of": "^6.0.2",
+    "lodash.isempty": "^4.4.0",
+    "provejs-params": "^1.0.1"
+  },
+  "devDependencies": {
+    "@ravdocs/eslint": "^1.0.7",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4"
+  },
+  "publishConfig": {
+    "scope": "ravdocs"
+  }
+}
