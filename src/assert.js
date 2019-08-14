@@ -130,6 +130,85 @@ exports._deepStrictEqualArguments = function(label, actual, expected) {
 	exports._deepStrictEqualArray(label, actual, expected);
 };
 
+exports.deepNarrowStrictEqual = function(label, actual, expected) {
+
+	Prove('s**', arguments);
+
+	var expectedKind = KindOf(expected);
+
+	exports._isKind(label, actual, expectedKind);
+
+	switch (expectedKind) {
+
+		case 'date': return exports._deepStrictEqualDate(label, actual, expected);
+		case 'error': return exports._deepStrictEqualError(label, actual, expected);
+		case 'buffer': return exports._deepStrictEqualBuffer(label, actual, expected);
+		case 'array': return exports._deepNarrowStrictEqualArray(label, actual, expected);
+		case 'object': return exports._deepNarrowStrictEqualObject(label, actual, expected);
+		case 'arguments': return exports._deepNarrowStrictEqualArguments(label, actual, expected);
+		case 'regexp': return exports._deepStrictEqualRegexp(label, actual, expected);
+		case 'map': return exports._deepNarrowStrictEqualMap(label, actual, expected);
+		case 'set': return exports._deepNarrowStrictEqualSet(label, actual, expected);
+		default: return exports.strictEqual(label, actual, expected);
+	}
+};
+
+exports._deepNarrowStrictEqualArray = function(label, actual, expected) {
+
+	Prove('SAA', arguments);
+
+	expected.forEach(function(expectedVal, i) {
+		var actualVal = actual[i];
+		exports.deepNarrowStrictEqual(`${label}[${i}]`, actualVal, expectedVal);
+	});
+};
+
+exports._deepNarrowStrictEqualMap = function(label, actual, expected) {
+
+	Prove('S**', arguments);
+
+	expected.forEach(function(expectedVal, key) {
+		var actualVal = actual.get(key);
+		exports.deepNarrowStrictEqual(`${label}[${key}]`, actualVal, expectedVal);
+	});
+};
+
+exports._deepNarrowStrictEqualSet = function(label, actual, expected) {
+
+	Prove('S**', arguments);
+
+	var actualIter = actual.values();
+	var expectedIter = expected.values();
+	var i;
+
+	for (i = 0; i < expected.size; i++) {
+		var actualVal = actualIter.next().value;
+		var expectedVal = expectedIter.next().value;
+		exports.deepNarrowStrictEqual(`${label}[${i}]`, actualVal, expectedVal);
+	}
+};
+
+exports._deepNarrowStrictEqualObject = function(label, actual, expected) {
+
+	Prove('S**', arguments);
+
+	// var actualKeys = Object.keys(actual);
+	var expectedKeys = Object.keys(expected);
+
+	expectedKeys.forEach(function(key) {
+		var actualVal = actual[key];
+		var expectedVal = expected[key];
+		exports.deepNarrowStrictEqual(`${label}[${key}]`, actualVal, expectedVal);
+	});
+};
+
+exports._deepNarrowStrictEqualArguments = function(label, actual, expected) {
+	Prove('S**', arguments);
+	actual = [].slice.call(actual, 0);
+	expected = [].slice.call(expected, 0);
+	exports._deepNarrowStrictEqualArray(label, actual, expected);
+};
+
 exports.isArray = function(label, actualVal) {
 	Prove('S*', arguments);
 	exports._isKind(label, actualVal, 'array');

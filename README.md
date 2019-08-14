@@ -8,6 +8,7 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 - [Methods](#methods)
 	- [Equality](#equality)
 		- [Assert.deepStrictEqual()](#assertdeepstrictequal)
+		- [Assert.deepNarrowStrictEqual()](#assertdeepnarrowstrictequal)
 		- [Assert.strictEqual()](#assertstrictequal)
 	- [Math](#math)
 		- [Assert.isLessThan()](#assertislessthan)
@@ -73,6 +74,38 @@ var actual2 = {a: 1};
 var expected2 = {a: '1'};
 Assert.deepStrictEqual('actual2', actual2, expected2);
 // AssertionError: Expected kind of 'actual2[a]' to be 'string' but got 'number'.
+```
+
+### Assert.deepNarrowStrictEqual()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<any>` (*required*) Actual value to test.
+- **expected** `<any>` (*required*) Expected value of the `actual` parameter.
+
+Similar to [Assert.deepStrictEqual()](#assertdeepstrictequal) except that it will pass when the `expected` parameter is a subset of the `actual` parameter. Any objects in the `expected` parameter must exist in the `actual` parameter, and the keys of these `expected` objects must exist in the corresponding `actual` objects, but the `actual` objects can have more keys than those in the `expected` ones. This rule applies for objects, arrays, Maps, and Sets. The built-in [`assert`](https://nodejs.org/api/assert.html) module does not have a counterpart to this method.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = {a: 1, b: 1};
+var expected1 = {a: 1};
+Assert.deepNarrowStrictEqual('actual1', actual1, expected1);
+// OK
+
+var actual2 = {a: 1};
+var expected2 = {a: 1, b: 1};
+Assert.deepNarrowStrictEqual('actual2', actual2, expected2);
+// AssertionError: Expected kind of 'actual2[b]' to be 'number' but got 'undefined'.
+
+var actual3 = ['a', 'b'];
+var expected3 = ['a'];
+Assert.deepNarrowStrictEqual('actual3', actual3, expected3);
+// OK
+
+var actual4 = ['a'];
+var expected4 = ['a', 'b'];
+Assert.deepNarrowStrictEqual('actual4', actual4, expected4);
+// AssertionError: Expected kind of 'actual4[1]' to be 'string' but got 'undefined'.
 ```
 
 ### Assert.strictEqual()
