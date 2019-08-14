@@ -4,7 +4,7 @@ var Prove = require('provejs-params');
 var Assert = require('assert');
 var KindOf = require('kind-of');
 var _ = {};
-_.IsEmpty = require('lodash.isempty');
+_.isEmpty = require('lodash.isempty');
 
 exports.strictEqual = function(label, actual, expected) {
 	Prove('S**', arguments);
@@ -297,12 +297,12 @@ exports._isKind = function(label, actualVal, expectedKind) {
 
 exports.isEmpty = function(label, val) {
 	Prove('S*', arguments);
-	Assert.ok(_.IsEmpty(val), `Expected '${label}' to be empty but it is not.`);
+	Assert.ok(_.isEmpty(val), `Expected '${label}' to be empty but it is not.`);
 };
 
 exports.isNotEmpty = function(label, val) {
 	Prove('S*', arguments);
-	Assert.ok(!_.IsEmpty(val), `Expected '${label}' not to be empty but it is.`);
+	Assert.ok(!_.isEmpty(val), `Expected '${label}' not to be empty but it is.`);
 };
 
 exports.isLessThan = function(label, actual, bar) {
