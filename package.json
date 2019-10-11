@@ -36,9 +36,9 @@
     "provejs-params": "^1.0.1"
   },
   "devDependencies": {
-    "@ravdocs/eslint": "^1.0.8",
-    "eslint": "^6.0.1",
-    "mocha": "^6.1.4"
+    "@ravdocs/eslint": "^1.0.11",
+    "eslint": "^6.5.1",
+    "mocha": "^6.2.1"
   },
   "publishConfig": {
     "scope": "ravdocs"
