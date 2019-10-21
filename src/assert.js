@@ -358,6 +358,11 @@ exports.isSymbol = function(label, actualVal) {
 	exports._isKind(label, actualVal, 'symbol');
 };
 
+exports.isUint8Array = function(label, actualVal) {
+	Prove('S*', arguments);
+	exports._isKind(label, actualVal, 'uint8array');
+};
+
 exports.isUndefined = function(label, actualVal) {
 	Prove('S*', arguments);
 	exports._isKind(label, actualVal, 'undefined');

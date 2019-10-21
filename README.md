@@ -35,6 +35,7 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.isSet()](#assertisset)
 		- [Assert.isString()](#assertisstring)
 		- [Assert.isSymbol()](#assertissymbol)
+		- [Assert.isUint8Array()](#assertisuint8array)
 		- [Assert.isUndefined()](#assertisundefined)
 	- [Throws](#throws)
 		- [Assert.throws()](#assertthrows)
@@ -628,6 +629,25 @@ Assert.isSymbol('actual1', actual1);
 var actual2 = '';
 Assert.isSymbol('actual2', actual2);
 // AssertionError: Expected kind of 'actual2' to be 'symbol' but got 'string'.
+```
+
+### Assert.isUint8Array()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **value** `<any>` (*required*) Actual value to test.
+
+Test whether the kind of `actual` is 'uint8array'. The kind is calculated with [`kind-of`](https://www.npmjs.com/package/kind-of).
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = new Uint8Array();
+Assert.isUint8Array('actual1', actual1);
+// OK
+
+var actual2 = '';
+Assert.isUint8Array('actual2', actual2);
+// AssertionError: Expected kind of 'actual2' to be 'uint8array' but got 'string'.
 ```
 
 ### Assert.isUndefined()
