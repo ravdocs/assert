@@ -398,3 +398,8 @@ exports.isGreaterThan = function(label, actual, expected) {
 	Prove('S**', arguments);
 	Assert.ok((actual > expected), `Expected '${label}' to be greater than (>) '${expected}' but got '${actual}'.`);
 };
+
+exports.throws = function(/*fn, err, message*/) {
+	// Prove('F*s', arguments);
+	Assert.throws.apply(Assert, arguments);
+};

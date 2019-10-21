@@ -5,6 +5,8 @@
   "keywords": [
     "assert",
     "bdd",
+    "err",
+    "error",
     "mocha",
     "tdd",
     "test"

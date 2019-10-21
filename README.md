@@ -36,6 +36,8 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.isString()](#assertisstring)
 		- [Assert.isSymbol()](#assertissymbol)
 		- [Assert.isUndefined()](#assertisundefined)
+	- [Throws](#throws)
+		- [Assert.throws()](#assertthrows)
 
 # Goals
 
@@ -645,4 +647,32 @@ Assert.isUndefined('actual1', actual1);
 var actual2 = '';
 Assert.isUndefined('actual2', actual2);
 // AssertionError: Expected kind of 'actual2' to be 'undefined' but got 'string'.
+```
+
+## Throws
+
+### Assert.throws()
+
+- **fn** `<Function>` (*required*)
+- **error** `<RegExp>` | `<Function>` | `<Object>` | `<Error>`
+- **message** `<string>`
+
+Alias of [`assert.throws`](https://nodejs.org/api/assert.html#assert_assert_throws_fn_error_message).
+
+```js
+var Assert = require('@ravdocs/assert');
+
+function fn1() {
+	throw new Error('Correct error');
+}
+var expected1 = {message: 'Correct error'};
+Assert.throws(fn1, expected1);
+// OK
+
+function fn2() {
+	throw new Error('Wrong error');
+}
+var expected2 = {message: 'Correct error'};
+Assert.throws(fn2, expected2);
+// AssertionError: Input A expected to strictly deep-equal input B:...
 ```
