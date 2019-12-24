@@ -1,6 +1,6 @@
 {
   "name": "@ravdocs/assert",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Wrapper around the assert module",
   "keywords": [
     "assert",
