@@ -384,6 +384,21 @@ exports.isNotEmpty = function(label, val) {
 	Assert.ok(!_.isEmpty(val), `Expected '${label}' not to be empty but it is.`);
 };
 
+exports.startsWith = function(label, actual, prefix) {
+	Prove('S**', arguments);
+	Assert.ok((actual.startsWith && actual.startsWith(prefix)), `Expected '${label}' to start with '${prefix}' but it does not.`);
+};
+
+exports.endsWith = function(label, actual, suffix) {
+	Prove('S**', arguments);
+	Assert.ok((actual.endsWith && actual.endsWith(suffix)), `Expected '${label}' to end with '${suffix}' but it does not.`);
+};
+
+exports.includes = function(label, actual, needle) {
+	Prove('S**', arguments);
+	Assert.ok((actual.includes && actual.includes(needle)), `Expected '${label}' to include '${needle}' but it does not.`);
+};
+
 exports.isLessThan = function(label, actual, bar) {
 	Prove('S**', arguments);
 	Assert.ok((actual < bar), `Expected '${label}' to be less than (<) '${bar}' but got '${actual}'.`);

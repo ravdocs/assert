@@ -10,6 +10,10 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.deepStrictEqual()](#assertdeepstrictequal)
 		- [Assert.deepNarrowStrictEqual()](#assertdeepnarrowstrictequal)
 		- [Assert.strictEqual()](#assertstrictequal)
+	- [Similarity](#similarity)
+		- [Assert.startsWith()](#assertstartswith)
+		- [Assert.endsWith()](#assertendswith)
+		- [Assert.includes()](#assertincludes)
 	- [Math](#math)
 		- [Assert.isLessThan()](#assertislessthan)
 		- [Assert.isAtMost()](#assertisatmost)
@@ -137,6 +141,84 @@ var actual3 = 1;
 var expected3 = 2;
 Assert.strictEqual('actual3', actual3, expected3);
 // AssertionError: Expected 'actual3' to be '2' but got '1'.
+```
+
+## Similarity
+
+### Assert.startsWith()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<string>` (*required*) Actual value to test.
+- **prefix** `<string>` (*required*) Expected prefix of the `actual` parameter.
+
+Test whether `actual` starts with `prefix`.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = 'ab';
+var prefix1 = 'a';
+Assert.startsWith('actual1', actual1, prefix1);
+// OK
+
+var actual2 = 'ab';
+var prefix2 = 'b';
+Assert.startsWith('actual2', actual2, prefix2);
+// AssertionError: Expected 'actual2' to start with 'b' but it does not.
+```
+
+### Assert.endsWith()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<string>` (*required*) Actual value to test.
+- **suffix** `<string>` (*required*) Expected suffix of the `actual` parameter.
+
+Test whether `actual` ends with `suffix`.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = 'ab';
+var suffix1 = 'b';
+Assert.endsWith('actual1', actual1, suffix1);
+// OK
+
+var actual2 = 'ab';
+var suffix2 = 'a';
+Assert.endsWith('actual2', actual2, suffix2);
+// AssertionError: Expected 'actual2' to end with 'a' but it does not.
+```
+
+### Assert.includes()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<string>` | `<any[]>` (*required*) Actual value to test.
+- **needle** `<any>` (*required*) Value expected to be inside the `actual` parameter.
+
+Test whether `actual` includes `needle`.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = 'abc';
+var needle1 = 'b';
+Assert.includes('actual1', actual1, needle1);
+// OK
+
+var actual2 = 'abc';
+var needle2 = 'd';
+Assert.includes('actual2', actual2, needle2);
+// AssertionError: Expected 'actual2' to include 'd' but it does not.
+
+var actual3 = ['a', 'b', 'c'];
+var needle3 = 'b';
+Assert.includes('actual3', actual3, needle3);
+// OK
+
+var actual4 = ['a', 'b', 'c'];
+var needle4 = 'd';
+Assert.includes('actual4', actual4, needle4);
+// AssertionError: Expected 'actual4' to include 'd' but it does not.
 ```
 
 ## Math
