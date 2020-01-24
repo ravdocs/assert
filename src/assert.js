@@ -3,8 +3,7 @@
 var Prove = require('provejs-params');
 var Assert = require('assert');
 var KindOf = require('kind-of');
-var _ = {};
-_.isEmpty = require('lodash.isempty');
+var IsEmpty = require('lodash.isempty');
 
 exports.strictEqual = function(label, actual, expected) {
 	Prove('S**', arguments);
@@ -376,12 +375,12 @@ function isKind(label, actualVal, expectedKind) {
 
 exports.isEmpty = function(label, val) {
 	Prove('S*', arguments);
-	Assert.ok(_.isEmpty(val), `Expected '${label}' to be empty but it is not.`);
+	Assert.ok(IsEmpty(val), `Expected '${label}' to be empty but it is not.`);
 };
 
 exports.isNotEmpty = function(label, val) {
 	Prove('S*', arguments);
-	Assert.ok(!_.isEmpty(val), `Expected '${label}' not to be empty but it is.`);
+	Assert.ok(!IsEmpty(val), `Expected '${label}' not to be empty but it is.`);
 };
 
 exports.startsWith = function(label, actual, prefix) {
