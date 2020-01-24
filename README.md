@@ -41,7 +41,9 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.isSymbol()](#assertissymbol)
 		- [Assert.isUint8Array()](#assertisuint8array)
 		- [Assert.isUndefined()](#assertisundefined)
-	- [Throws](#throws)
+	- [Misc](#misc)
+		- [Assert.fail()](#assertfail)
+		- [Assert.ok()](#assertok)
 		- [Assert.throws()](#assertthrows)
 
 # Goals
@@ -751,7 +753,42 @@ Assert.isUndefined('actual2', actual2);
 // AssertionError: Expected kind of 'actual2' to be 'undefined' but got 'string'.
 ```
 
-## Throws
+## Misc
+
+### Assert.fail()
+
+- **message** `<string>`
+
+Alias of [`assert.fail`](https://nodejs.org/api/assert.html#assert_assert_fail_message).
+
+```js
+var Assert = require('@ravdocs/assert');
+
+Assert.fail();
+// AssertionError [ERR_ASSERTION]: Failed
+
+Assert.fail('An error occurred');
+// AssertionError [ERR_ASSERTION]: An error occurred
+```
+
+### Assert.ok()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<any>` (*required*) Actual value to test.
+
+Test whether `actual` is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy). It behaves similar to [`assert.ok`](https://nodejs.org/api/assert.html#assert_assert_ok_value_message).
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = 1;
+Assert.ok('actual1', actual1);
+// OK
+
+var actual2 = 0;
+Assert.ok('actual2', actual2);
+// AssertionError: Expected 'actual2' to be truthy but it is not.
+```
 
 ### Assert.throws()
 
