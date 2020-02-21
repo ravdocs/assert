@@ -19,6 +19,7 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.isAtMost()](#assertisatmost)
 		- [Assert.isAtLeast()](#assertisatleast)
 		- [Assert.isGreaterThan()](#assertisgreaterthan)
+		- [Assert.isBetween()](#assertisbetween)
 	- [Emptiness](#emptiness)
 		- [Assert.isEmpty()](#assertisempty)
 		- [Assert.isNotEmpty()](#assertisnotempty)
@@ -330,6 +331,37 @@ Assert.isGreaterThan('actual2', actual2, bar2);
 var actual3 = 6;
 var bar3 = 5;
 Assert.isGreaterThan('actual3', actual3, bar3);
+// OK
+```
+
+### Assert.isBetween()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<any>` (*required*) Actual value to test.
+- **min** `<any>` (*required*) The `actual` parameter should be greater than or equal to (>=) this value.
+- **max** `<any>` (*required*) The `actual` parameter should be less than or equal to (<=) this value.
+
+Test whether `actual` is between `min` and `max`. Like the SQL `BETWEEN` operator, this method is inclusive; the test will pass if `actual` equals `min` or `max`.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = 6;
+var min1 = 2;
+var max1 = 5;
+Assert.isBetween('actual1', actual1, min1, max1);
+// AssertionError: Expected 'actual1' to be between '2' and '5' but got '6'.
+
+var actual2 = 4;
+var min2 = 2;
+var max2 = 5;
+Assert.isBetween('actual2', actual2, min2, max2);
+// OK
+
+var actual3 = 5;
+var min3 = 2;
+var max3 = 5;
+Assert.isBetween('actual3', actual3, min3, max3);
 // OK
 ```
 

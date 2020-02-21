@@ -418,6 +418,11 @@ exports.isGreaterThan = function(label, actual, expected) {
 	Assert.ok((actual > expected), `Expected '${label}' to be greater than (>) '${expected}' but got '${actual}'.`);
 };
 
+exports.isBetween = function(label, actual, min, max) {
+	Prove('S***', arguments);
+	Assert.ok((actual >= min && actual <= max), `Expected '${label}' to be between '${min}' and '${max}' but got '${actual}'.`);
+};
+
 exports.fail = function(/*message*/) {
 	// Prove('s', arguments);
 	Assert.fail.apply(Assert, arguments);
