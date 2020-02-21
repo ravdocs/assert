@@ -33,7 +33,7 @@
     "test": "mocha --recursive"
   },
   "dependencies": {
-    "kind-of": "^6.0.2",
+    "kind-of": "^6.0.3",
     "lodash.isempty": "^4.4.0",
     "provejs-params": "^1.0.1"
   },
