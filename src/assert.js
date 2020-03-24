@@ -282,6 +282,68 @@ function deepKindArguments(label, actual, expected) {
 	deepKindArray(label, actual, expected);
 }
 
+exports.deepNarrowKind = function(label, actual, expected) {
+
+	Prove('s**', arguments);
+
+	var expectedIsKind = (typeof expected === 'string');
+
+	if (expectedIsKind) return isKind(label, actual, expected);
+
+	var expectedKind = KindOf(expected);
+
+	isKind(label, actual, expectedKind);
+
+	switch (expectedKind) {
+		case 'array': return deepNarrowKindArray(label, actual, expected);
+		case 'object': return deepNarrowKindObject(label, actual, expected);
+		case 'arguments': return deepNarrowKindArguments(label, actual, expected);
+		case 'map': return deepNarrowKindMap(label, actual, expected);
+		default: Assert.fail(`Invalid kind '${expectedKind}' for '${label}'.`);
+	}
+};
+
+function deepNarrowKindArray(label, actual, expected) {
+
+	Prove('SAA', arguments);
+
+	expected.forEach(function(expectedVal, i) {
+		var actualVal = actual[i];
+		exports.deepNarrowKind(`${label}[${i}]`, actualVal, expectedVal);
+	});
+}
+
+function deepNarrowKindMap(label, actual, expected) {
+
+	Prove('S**', arguments);
+
+	expected.forEach(function(expectedVal, key) {
+		var actualVal = actual.get(key);
+		exports.deepNarrowKind(`${label}[${key}]`, actualVal, expectedVal);
+	});
+}
+
+function deepNarrowKindObject(label, actual, expected) {
+
+	Prove('S**', arguments);
+
+	// var actualKeys = Object.keys(actual);
+	var expectedKeys = Object.keys(expected);
+
+	expectedKeys.forEach(function(key) {
+		var actualVal = actual[key];
+		var expectedVal = expected[key];
+		exports.deepNarrowKind(`${label}[${key}]`, actualVal, expectedVal);
+	});
+}
+
+function deepNarrowKindArguments(label, actual, expected) {
+	Prove('S**', arguments);
+	actual = [].slice.call(actual, 0);
+	expected = [].slice.call(expected, 0);
+	deepNarrowKindArray(label, actual, expected);
+}
+
 exports.isArray = function(label, actualVal) {
 	Prove('S*', arguments);
 	isKind(label, actualVal, 'array');

@@ -25,6 +25,7 @@ Node.js wrapper aroudn the [assert core module](https://nodejs.org/api/assert.ht
 		- [Assert.isNotEmpty()](#assertisnotempty)
 	- [Kind](#kind)
 		- [Assert.deepKind()](#assertdeepkind)
+		- [Assert.deepNarrowKind()](#assertdeepnarrowkind)
 		- [Assert.isArray()](#assertisarray)
 		- [Assert.isBoolean()](#assertisboolean)
 		- [Assert.isBuffer()](#assertisbuffer)
@@ -458,6 +459,43 @@ var expected4 = [
 ];
 Assert.deepKind('actual4', actual4, expected4);
 // AssertionError: Expected kind of 'actual4[b]' to be 'number' but got 'string'.
+```
+
+### Assert.deepNarrowKind()
+
+- **label** `<string>` (*required*) Name of the variable used as the `actual` parameter. The error message will refer to the `actual` parameter by this label.
+- **actual** `<any>` (*required*) Actual value to test.
+- **expected** `<any>` (*required*) Expected kind of the `actual` parameter.
+
+Similar to [Assert.deepKind()](#assertdeepkind) except that it will pass when the `expected` parameter is a subset of the `actual` parameter. Any objects in the `expected` parameter must exist in the `actual` parameter, and the keys of these `expected` objects must exist in the corresponding `actual` objects, but the `actual` objects can have more keys than those in the `expected` ones. This rule applies for objects, arrays, and Maps. The built-in [`assert`](https://nodejs.org/api/assert.html) module does not have a counterpart to this method.
+
+```js
+var Assert = require('@ravdocs/assert');
+
+var actual1 = {a: 1, b: 'astring'};
+var expected1 = {a: 'number', b: 'string'};
+Assert.deepNarrowKind('actual1', actual1, expected1);
+// OK
+
+var actual2 = {a: 1, b: 'astring'};
+var expected2 = {a: 'number', b: 'number'};
+Assert.deepNarrowKind('actual2', actual2, expected2);
+// AssertionError: Expected kind of 'actual2[b]' to be 'number' but got 'string'.
+
+var actual3 = {a: 1, b: 'astring'};
+var expected3 = {a: 'number'};
+Assert.deepNarrowKind('actual3', actual3, expected3);
+// OK
+
+var actual4 = {a: 1};
+var expected4 = {a: 'number', b: 'string'};
+Assert.deepNarrowKind('actual4', actual4, expected4);
+// AssertionError: Expected kind of 'actual4[b]' to be 'number' but got 'undefined'.
+
+var actual5 = {a: 1, b: 'astring'};
+var expected5 = 'object';
+Assert.deepNarrowKind('actual5', actual5, expected5);
+// OK
 ```
 
 ### Assert.isArray()
