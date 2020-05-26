@@ -491,7 +491,7 @@ exports.fail = function(/*message*/) {
 };
 
 exports.ok = function(label, actual) {
-	Prove('S**', arguments);
+	Prove('S*', arguments);
 	Assert.ok(actual, `Expected '${label}' to be truthy but it is not.`);
 };
 
