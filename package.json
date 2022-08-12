@@ -29,7 +29,7 @@
     "index.js"
   ],
   "scripts": {
-    "lint": "node_modules/.bin/eslint --rulesdir node_modules/@ravdocs/eslint/rules .",
+    "lint": "eslint --rulesdir node_modules/@ravdocs/eslint/rules .",
     "test": "mocha --recursive"
   },
   "dependencies": {
