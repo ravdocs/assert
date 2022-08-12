@@ -20,14 +20,14 @@
     "url": "git+https://github.com/ravdocs/assert.git"
   },
   "license": "MIT",
-  "files": [
-    "src",
-    "index.js"
-  ],
   "main": "index.js",
   "directories": {
     "test": "test"
   },
+  "files": [
+    "src",
+    "index.js"
+  ],
   "scripts": {
     "lint": "node_modules/.bin/eslint --rulesdir node_modules/@ravdocs/eslint/rules .",
     "test": "mocha --recursive"
